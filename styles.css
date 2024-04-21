@@ -351,6 +351,7 @@ a {
   width: round(down, 100vw, 80px);
   padding: 1rem 4rem 2rem;
   margin: auto;
+  line-height: 1.5rem;
 }
 .footer__link {
   text-decoration: underline;
