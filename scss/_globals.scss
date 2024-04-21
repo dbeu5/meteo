@@ -19,6 +19,8 @@
   --separator-gray: #dbdcdd;
 
   font: 16px "Varela Round", sans-serif;
+  @media only screen and (min-resolution: 350dpi) { font-size: 24px; }
+  @media only screen and (min-resolution: 450dpi) { font-size: 32px; }
   background-color: var(--back-blue);
 }
 
