@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteo App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="./styles.css?v=6" rel="stylesheet">
+    <link href="./favicon.ico" rel="icon" type="image/x-icon">
+  </head>
+  <body>
+    <header class="header">
+      <section class="header__section header__section--info">
+        <img
+          class="header__section__image"
+          src="./res/loading.svg"
+          alt="logo">
+        <strong class="header__section--info__place">Loading</strong>
+      </section>
+      <section class="header__section header__section--search">
+        <div class="header__section--search__row">
+          <img
+            class="header__section--search__row__image"
+            src="./res/search.svg"
+            alt="search">
+          <input
+            class="header__section--search__row__input"
+            id = "town-search"
+            type="search"
+            placeholder="Search for a location">
+        </div>
+        <div class="header__section--search__row">
+          <div class="header__section--search__row__result-box" id="town-result">
+            <a class="header__section--search__row__result-box__item" href="#781">
+              <span class="header__section--search__row__result-box__item__town">
+                Zagreb
+              </span>
+              <span class="header__section--search__row__result-box__item__info">
+                Croatia
+              </span>
+            </a>
+            <a class="header__section--search__row__result-box__item" href="#95">
+              <span class="header__section--search__row__result-box__item__town">
+                Berlin
+              </span>
+              <span class="header__section--search__row__result-box__item__info">
+                Germany
+              </span>
+            </a>
+            <a class="header__section--search__row__result-box__item" href="#25">
+              <span class="header__section--search__row__result-box__item__town">
+                London
+              </span>
+              <span class="header__section--search__row__result-box__item__info">
+                United Kingdom
+              </span>
+            </a>
+            <a class="header__section--search__row__result-box__item" href="#26">
+              <span class="header__section--search__row__result-box__item__town">
+                New York City
+              </span>
+              <span class="header__section--search__row__result-box__item__info">
+                Unites States
+              </span>
+            </a>
+            <a class="header__section--search__row__result-box__item" href="#29">
+              <span class="header__section--search__row__result-box__item__town">
+                Tokyo
+              </span>
+              <span class="header__section--search__row__result-box__item__info">
+                Japan
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="header__section header__section--location" id="location-button">
+        <img
+          class="header__section__image header__section__image--location"
+          src="./res/location.svg"
+          alt="location">
+      </section>
+    </header>
+    <main class="main">
+      <section class="main__section main__section--current">
+        <strong class="main__section__title">Current Conditions</strong>
+        <div class="main__section--current__grid">
+          <img
+            class="main__section--current__grid__condition"
+            src="./res/loading.svg"
+            alt="current condition"
+            title="Current weather condition">
+          <span class="main__section--current__grid__temperature"></span>
+          <span class="main__section--current__grid__condition-name"></span>
+          <div class="main__section--current__grid__feels-like">
+            Feels like <span class="main__section--current__grid__feels-like__temp"></span>
+          </div>
+          <div class="main__section--current__grid__status">
+            <img
+              class="main__section--current__grid__status__image"
+              src="./res/status-clouds.svg"
+              alt="clouds status"
+              title="Clouds percentage">
+            <span class="main__section--current__grid__status__value"></span>
+          </div>
+          <div class="main__section--current__grid__status">
+            <img
+              class="main__section--current__grid__status__image"
+              src="./res/status-precipitation.svg"
+              alt="precipitation status"
+              title="Precipitation probability">
+            <span class="main__section--current__grid__status__value"></span>
+          </div>
+          <div class="main__section--current__grid__status">
+            <img
+              class="main__section--current__grid__status__image"
+              src="./res/status-wind.svg"
+              alt="wind status"
+              title="Wind speed">
+            <span class="main__section--current__grid__status__value"></span>
+          </div>
+          <div class="main__section--current__grid__status">
+            <img
+              class="main__section--current__grid__status__image"
+              src="./res/status-pressure.svg"
+              alt="pressure status"
+              title="Pressure">
+            <span class="main__section--current__grid__status__value"></span>
+          </div>
+        </div>
+      </section>
+      <section class="main__section main__section--forecast">
+        <strong class="main__section__title">Forecast</strong>
+        <div class="main__section--forecast__list">
+        </div>
+      </section>
+      <section class="main__section main__section--details">
+        <div class="main__section__title">
+          Details for
+          <button class="main__section__title__button" id="detailed-prev">
+            <img
+              class="main__section__title__button__image"
+              src="./res/details-prev.svg"
+              alt="previous day"
+              title="Previous day">
+          </button>
+          <span class="main__section__title__day" id="detailed-day">day</span>
+          <button class="main__section__title__button" id="detailed-next">
+            <img
+              class="main__section__title__button__image"
+              src="./res/details-next.svg"
+              alt="next day"
+              title="Next day">
+          </button>
+        </div>
+        <div class="main__section--details__grid" id="details-grid">
+        </div>
+        <div class="main__section--details__day">
+          <div class="main__section--details__day__status">
+            <img
+              class="main__section--details__day__status__image"
+              src="./res/status-sunrise.svg"
+              alt="sunrise status"
+              title="Sunrise time">
+            <span class="main__section--details__day__status__value"></span>
+          </div>
+          <div class="main__section--details__day__status">
+            <img
+              class="main__section--details__day__status__image"
+              src="./res/status-sunset.svg"
+              alt="sunset status"
+              title="Sunset time">
+            <span class="main__section--details__day__status__value"></span>
+          </div>
+          <div class="main__section--details__day__status">
+            <img
+              id="status-uvi"
+              class="main__section--details__day__status__image"
+              src="./res/status-uvi-0.svg"
+              alt="uvi status"
+              title="Maximum daily UV index">
+            <span class="main__section--details__day__status__value"></span>
+          </div>
+          <div class="main__section--details__day__status">
+            <img
+              class="main__section--details__day__status__image"
+              src="./res/status-rain.svg"
+              alt="rain status"
+              title="Daily precipitation sum">
+            <span class="main__section--details__day__status__value"></span>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      Icons used:
+      <a class="footer__link" href="https://akveo.github.io/eva-icons">Eva Icons</a>
+      by
+      <a class="footer__link" href="https://github.com/akveo">Akveo</a>
+      and
+      <a class="footer__link" href="https://bas.dev/work/meteocons">Meteocons</a>
+      by
+      <a class="footer__link" href="https://github.com/basmilius">Bas Milius</a>
+      <br>
+      Location data based on 
+      <a class="footer__link" href="https://www.geonames.org/">Geonames</a>
+    </footer>
+  </body>
+
+  <script src="d3.v7.min.js"></script>
+  <script src="towns.js?v=6"></script>
+  <script src="script.js?v=6"></script>
+</html>
