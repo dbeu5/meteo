@@ -6,6 +6,7 @@
   @include  width-mq("phone") { width: 100vw; }
   height: 4rem;
   padding: 1rem 4rem 0;
+  @include  width-mq("phone") { padding: 1rem 1rem 0; }
   margin: auto;
 
   display: flex;
@@ -132,6 +133,7 @@
   width: round(down, 100vw, 2rem);
   @include  width-mq("phone") { width: 100vw; }
   padding: 1rem 4rem;
+  @include  width-mq("phone") { padding: 1rem; }
   margin: auto;
 
   display: grid;
@@ -353,9 +355,10 @@
   width: round(down, 100vw, 2rem);
   @include  width-mq("phone") { width: 100vw; }
   padding: 1rem 4rem 2rem;
+  @include  width-mq("phone") { padding: 1rem 1rem 2rem; }
   margin: auto;
 
-  line-height: 1.5rem;
+  line-height: 2rem;
   
   &__link {
     text-decoration: underline;

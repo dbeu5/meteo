@@ -1,13 +1,10 @@
 @use "sass:map";
 
 $width-breakpoints: (
-  long: 64rem,
-  medium: 52rem,
-  short: 48rem,
-  phone: 44rem,
-  tablet-check: 800px,
-  grid-check: 640px,
-  phone-check: 512px,
+  long: 1280px,
+  medium: 1040px,
+  short: 960px,
+  phone: 880px,
 );
 
 @mixin width-mq($key) {

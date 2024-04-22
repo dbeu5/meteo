@@ -20,12 +20,7 @@
   font: 20px "Varela Round", sans-serif;
   background-color: var(--back-blue);
 }
-@media only screen and (max-width: 800px) {
-  :root {
-    font-size: 16px;
-  }
-}
-@media only screen and (max-width: 512px) {
+@media only screen and (max-width: 880px) {
   :root {
     font-size: 12px;
   }
@@ -45,12 +40,17 @@ a {
   justify-content: space-between;
   gap: 2rem;
 }
-@media only screen and (max-width: 44rem) {
+@media only screen and (max-width: 880px) {
   .header {
     width: 100vw;
   }
 }
-@media only screen and (max-width: 48rem) {
+@media only screen and (max-width: 880px) {
+  .header {
+    padding: 1rem 1rem 0;
+  }
+}
+@media only screen and (max-width: 960px) {
   .header {
     gap: 1rem;
   }
@@ -147,7 +147,7 @@ a {
   background-color: var(--hover-blue);
   cursor: pointer;
 }
-@media only screen and (max-width: 52rem) {
+@media only screen and (max-width: 1040px) {
   .header:focus-within > .header__section--info, .header:focus-within > .header__section--location {
     display: none;
   }
@@ -162,12 +162,17 @@ a {
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
-@media only screen and (max-width: 44rem) {
+@media only screen and (max-width: 880px) {
   .main {
     width: 100vw;
   }
 }
-@media only screen and (max-width: 64rem) {
+@media only screen and (max-width: 880px) {
+  .main {
+    padding: 1rem;
+  }
+}
+@media only screen and (max-width: 1280px) {
   .main {
     display: flex;
     flex-direction: column;
@@ -189,7 +194,7 @@ a {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 8rem 2rem 5rem;
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: ) {
   .main__section--current__grid {
     grid-template-rows: 8rem 2rem 5rem 5rem;
   }
@@ -226,7 +231,7 @@ a {
   place-content: center;
   place-items: center;
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: ) {
   .main__section--current__grid__status, .main__section--details__day__status {
     grid-column: span 2;
   }
@@ -245,7 +250,7 @@ a {
   grid-column: 3/4;
   grid-row: 1/3;
 }
-@media only screen and (max-width: 64rem) {
+@media only screen and (max-width: 1280px) {
   .main__section--forecast {
     position: static;
     max-height: fit-content;
@@ -258,12 +263,12 @@ a {
   grid-auto-flow: column;
   column-gap: 2rem;
 }
-@media only screen and (max-width: 64rem) {
+@media only screen and (max-width: 1280px) {
   .main__section--forecast__list {
     grid-template-rows: repeat(6, 3fr);
   }
 }
-@media only screen and (max-width: 44rem) {
+@media only screen and (max-width: 880px) {
   .main__section--forecast__list {
     grid-template-rows: repeat(12, 3fr);
   }
@@ -371,11 +376,16 @@ a {
   width: round(down, 100vw, 2rem);
   padding: 1rem 4rem 2rem;
   margin: auto;
-  line-height: 1.5rem;
+  line-height: 2rem;
 }
-@media only screen and (max-width: 44rem) {
+@media only screen and (max-width: 880px) {
   .footer {
     width: 100vw;
+  }
+}
+@media only screen and (max-width: 880px) {
+  .footer {
+    padding: 1rem 1rem 2rem;
   }
 }
 .footer__link {
