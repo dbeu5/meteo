@@ -1,3 +1,5 @@
+@use "media-query" as *;
+
 *, *::before, *::after {
   box-sizing: border-box;
   padding: 0;
@@ -18,9 +20,9 @@
   --text-blue: #4181e1;
   --separator-gray: #dbdcdd;
 
-  font: 16px "Varela Round", sans-serif;
-  @media only screen and (min-resolution: 350dpi) { font-size: 24px; }
-  @media only screen and (min-resolution: 450dpi) { font-size: 32px; }
+  font: 20px "Varela Round", sans-serif;
+  @include width-mq("tablet-check") { font-size: 16px; }
+  @include width-mq("phone-check") { font-size: 12px; }
   background-color: var(--back-blue);
 }
 

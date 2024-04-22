@@ -281,7 +281,7 @@ const updateForecast = (data = {error: true}) => {
 const updateDetailedDay = (offset = 0) => {
   const day = new Date(Date.now() + 3600000 * offset);
   const dayInWeek = daysInWeek[day.getDay()];
-  document.getElementById("detailed-day").textContent = `${dayInWeek}, ${day.getDate()}/${day.getMonth() + 1}`;
+  document.getElementById("detailed-day").textContent = dayInWeek;
 }
 
 const updateDetails = (dataset = {error: true}, offset = 0) => {
