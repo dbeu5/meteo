@@ -20,12 +20,17 @@
   --text-blue: #4181e1;
   --separator-gray: #dbdcdd;
 
-  font: 20px "Varela Round", sans-serif;
-  @include width-mq("phone") { font-size: 12px; }
+  font: 16px "Varela Round", sans-serif;
+  @include width-mq("short") { font-size: 12px; }
   background-color: var(--back-blue);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+@mixin expand-padding {
+  padding: 1rem 4rem;
+  @include width-mq("short") { padding-left: 1rem; padding-right: 1rem; }
 }

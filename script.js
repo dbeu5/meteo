@@ -209,7 +209,7 @@ const getWeatherData = async (lat, lon, days, hourly="", daily="", current="") =
 }
 
 const updateLogo = (isError, isDay = false) => {
-  const logo = document.querySelector(".header__section__image");
+  const logo = document.getElementById("logo-image");
   logo.src = `./res/logo-${isError ? "error" : (isDay ? "day" : "night")}.svg`;
 }
 
@@ -290,6 +290,8 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
   document.getElementById("details-grid").textContent = "";
 
   const rem = parseInt(getComputedStyle(document.querySelector(":root")).fontSize);
+  const graphHeight = 10 * rem;
+  const graphWidthUnit = 5 * rem;
 
   const times = dataset.hourly.time.slice(offset, 24 + offset);
   const symbols = dataset.hourly.weather_code.slice(offset, 24 + offset).map(
@@ -334,10 +336,10 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
   // precipitation graph
   const yRange = d3.scaleLinear()
     .domain([-2, 101])
-    .range([15 * rem, rem / 2]);
+    .range([graphHeight, rem / 2]);
   const xRange = d3.scaleLinear()
     .domain([0, 25])
-    .range([-1, (6 * rem + 1) * 25]);
+    .range([-1, (graphWidthUnit + 1) * 25]);
 
   const areaGenerator = d3.area()
     .x((_, i) => xRange(i))
@@ -347,8 +349,8 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
 
   d3.select("#details-grid")
     .append("svg")
-    .attr("width", 6 * rem * 24)
-    .attr("height", 15 * rem)
+    .attr("width", graphWidthUnit * 24)
+    .attr("height", graphHeight)
     .attr("class", "main__section--details__grid__graph")
     .attr("id", "graph");
   
@@ -361,8 +363,8 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
   
   d3.select("#graph")
     .append("image")
-    .attr("x", 2 * rem)
-    .attr("y", 2 * rem)
+    .attr("x", 1.5 * rem)
+    .attr("y", 1.5 * rem)
     .attr("width", 2 * rem)
     .attr("height", 2 * rem)
     .attr("xlink:href", "./res/details-precipitation.svg");
@@ -380,7 +382,7 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
   const statusValueList = [
     `${dataset.daily.sunrise[Math.floor(offset / 24)].split("T")[1]}`,
     `${dataset.daily.sunset[Math.floor(offset / 24)].split("T")[1]}`,
-    `Max UVI is ${Math.floor(dataset.daily.uv_index_max[Math.floor(offset / 24)])}`,
+    `${Math.floor(dataset.daily.uv_index_max[Math.floor(offset / 24)])}`,
     `${Math.round(dataset.daily.precipitation_sum[Math.floor(offset / 24)])} mm`,
   ];
 

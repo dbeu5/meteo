@@ -2,34 +2,57 @@
 @use "media-query" as *;
 
 .header {
-  width: round(down, 100vw, 2rem);
-  @include  width-mq("phone") { width: 100vw; }
-  height: 4rem;
-  padding: 1rem 4rem 0;
-  @include  width-mq("phone") { padding: 1rem 1rem 0; }
+  width: 100vw;
+  max-width: 1600px;
+  height: 8rem;
+
+  @include expand-padding;
+  padding-bottom: 0;
   margin: auto;
 
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 2rem;
-  @include width-mq("short") { gap: 1rem; }
+  column-gap: 2rem;
+  @include width-mq("short") { column-gap: 1rem; }
+  row-gap: 1rem;
 
   &__section {
-    height: 100%;
+    height: 3rem;
 
+    &--banner {
+      flex-basis: 100%;
+
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      @include width-mq("phone") { gap: 0; }
+      
+      &__title {
+        font-size: 1.5rem;
+        padding-left: 0.5rem;
+      }
+      &__code {
+        margin-left: auto;
+        text-decoration: underline;
+
+        &:hover { color: var(--text-blue); }
+        transition: color 0.2s;
+      }
+    }
     &--info {
       display: flex;
       place-content: center;
       align-items: center;
 
-      &__place {
-        font-size: 1.25rem;
-      }
+      &__place { font-size: 1.25rem; }
     }
     &--search {
+      flex: 1;
+
       z-index: 10;
       width: 100%;
-      max-width: 44rem;
+      max-width: 40rem;
       height: fit-content;
       background-color: var(--section-blue);
       border-radius: 0.5rem;
@@ -120,7 +143,7 @@
     }
   }
 
-  @include width-mq("medium") {
+  @include width-mq("phone") {
     &:focus-within > &__section--info,
     &:focus-within > &__section--location {
       display: none;
@@ -130,14 +153,15 @@
 
 .main {
   color: var(--text-black);
-  width: round(down, 100vw, 2rem);
-  @include  width-mq("phone") { width: 100vw; }
-  padding: 1rem 4rem;
-  @include  width-mq("phone") { padding: 1rem; }
+  
+  width: 100vw;
+  max-width: 1600px;
+
+  @include expand-padding;
   margin: auto;
 
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr 20rem;
   gap: 1rem;
 
   @include width-mq("long") {
@@ -152,7 +176,7 @@
 
     display: none;
     flex-direction: column;
-  
+
     &--current {
       grid-column: 1 / 3;
       grid-row: 1 / 2;
@@ -161,7 +185,7 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: 8rem 2rem 5rem;
-        @include width-mq("grid-check") { grid-template-rows: 8rem 2rem 5rem 5rem; }
+        @include width-mq("phone") { grid-template-rows: 8rem 2rem 5rem 5rem; }
 
         &__condition {
           grid-column: 1 / 3;
@@ -192,7 +216,7 @@
         }
         &__status {
           height: 100%;
-          @include width-mq("grid-check") { grid-column: span 2;}
+          @include width-mq("phone") { grid-column: span 2;}
 
           display: flex;
           flex-direction: column;
@@ -203,7 +227,12 @@
             height: 3rem;
           }
           &__value {
-            line-height: 2rem;
+            line-height: 1rem;
+          }
+          &__description {
+            line-height: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-gray);
           }
         }
       }
@@ -269,7 +298,7 @@
         margin-top: 1rem;
 
         display: grid;
-        grid-template-columns: repeat(24, 6rem);
+        grid-template-columns: repeat(24, 5rem);
         gap: 0 1px;
 
         &__time {
@@ -312,6 +341,7 @@
           @extend .main__section--current__grid__status;
           &__image { @extend .main__section--current__grid__status__image; }
           &__value { @extend .main__section--current__grid__status__value; }
+          &__description { @extend .main__section--current__grid__status__description; }
         }
       }
     }
@@ -352,14 +382,15 @@
 
 .footer {
   color: var(--text-black);
-  width: round(down, 100vw, 2rem);
-  @include  width-mq("phone") { width: 100vw; }
-  padding: 1rem 4rem 2rem;
-  @include  width-mq("phone") { padding: 1rem 1rem 2rem; }
-  margin: auto;
+  
+  width: 100vw;
+  max-width: 1600px;
+  
+  @include expand-padding;
+  margin: 0 auto 1rem;
 
   line-height: 2rem;
-  
+
   &__link {
     text-decoration: underline;
 

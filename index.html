@@ -10,8 +10,18 @@
   </head>
   <body>
     <header class="header">
+      <section class="header__section header__section--banner">
+        <span class="header__section--banner__title">
+          <strong>Meteo App</strong>
+          by Domagoj Beus
+        </span>
+        <a class="header__section--banner__code" href="https://github.com/dbeu5/meteo">
+          source code
+        </a>
+      </section>
       <section class="header__section header__section--info">
         <img
+          id="logo-image"
           class="header__section__image"
           src="./res/loading.svg"
           alt="logo">
@@ -102,14 +112,16 @@
               alt="clouds status"
               title="Clouds percentage">
             <span class="main__section--current__grid__status__value"></span>
+            <span class="main__section--current__grid__status__description">Clouds</span>
           </div>
           <div class="main__section--current__grid__status">
             <img
               class="main__section--current__grid__status__image"
               src="./res/status-precipitation.svg"
               alt="precipitation status"
-              title="Precipitation probability">
+              title="Precipitation chance">
             <span class="main__section--current__grid__status__value"></span>
+            <span class="main__section--current__grid__status__description">Chance for rain</span>
           </div>
           <div class="main__section--current__grid__status">
             <img
@@ -118,6 +130,7 @@
               alt="wind status"
               title="Wind speed">
             <span class="main__section--current__grid__status__value"></span>
+            <span class="main__section--current__grid__status__description">Wind speed</span>
           </div>
           <div class="main__section--current__grid__status">
             <img
@@ -126,6 +139,7 @@
               alt="pressure status"
               title="Pressure">
             <span class="main__section--current__grid__status__value"></span>
+            <span class="main__section--current__grid__status__description">Pressure</span>
           </div>
         </div>
       </section>
@@ -163,6 +177,7 @@
               alt="sunrise status"
               title="Sunrise time">
             <span class="main__section--details__day__status__value"></span>
+            <span class="main__section--details__day__status__description">Sunrise</span>
           </div>
           <div class="main__section--details__day__status">
             <img
@@ -171,6 +186,7 @@
               alt="sunset status"
               title="Sunset time">
             <span class="main__section--details__day__status__value"></span>
+            <span class="main__section--details__day__status__description">Sunset</span>
           </div>
           <div class="main__section--details__day__status">
             <img
@@ -180,6 +196,7 @@
               alt="uvi status"
               title="Maximum daily UV index">
             <span class="main__section--details__day__status__value"></span>
+            <span class="main__section--details__day__status__description">Max UV index</span>
           </div>
           <div class="main__section--details__day__status">
             <img
@@ -188,6 +205,7 @@
               alt="rain status"
               title="Daily precipitation sum">
             <span class="main__section--details__day__status__value"></span>
+            <span class="main__section--details__day__status__description">Precipitation</span>
           </div>
         </div>
       </section>
@@ -203,7 +221,7 @@
       <a class="footer__link" href="https://akveo.github.io/eva-icons">Eva Icons</a>
       by
       <a class="footer__link" href="https://github.com/akveo">Akveo</a>
-      and
+      &
       <a class="footer__link" href="https://bas.dev/work/meteocons">Meteocons</a>
       by
       <a class="footer__link" href="https://github.com/basmilius">Bas Milius</a>
