@@ -253,7 +253,7 @@ const updateForecast = (data = {error: true}) => {
   forecastList.textContent = "";
 
   for (let i = 0; i < data.daily.time.length; i++) {
-    const day = new Date(Date.now() + 86400000 * i);
+    const day = new Date(Date.parse(data.daily.time[i]));
     const dayInWeek = daysInWeek[day.getDay()].slice(0, 3);
     forecastCodeName = getForecastConditionSymbol(data.daily.weather_code[i]);
     forecastList.innerHTML += `
@@ -278,8 +278,8 @@ const updateForecast = (data = {error: true}) => {
   }
 }
 
-const updateDetailedDay = (offset = 0) => {
-  const day = new Date(Date.now() + 3600000 * offset);
+const updateDetailedDay = (dayName) => {
+  const day = new Date(Date.parse(dayName));
   const dayInWeek = daysInWeek[day.getDay()];
   document.getElementById("detailed-day").textContent = dayInWeek;
 }
@@ -307,7 +307,7 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
   let precipitationProbabilities = dataset.hourly.precipitation_probability.slice(offset, 25 + offset);
 
   // display day
-  updateDetailedDay(offset);
+  updateDetailedDay(dataset.daily.time[offset / 24]);
 
   // times
   d3.select("#details-grid").selectAll(".main__section--details__grid__time")
@@ -315,7 +315,7 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
     .attr("class", "main__section--details__grid__time")
     .text((d) => {
       const difference = (Date.parse(d) - Date.now() - (dataset.utc_offset_seconds - 7200) * 1000) / 3600000;
-      if (difference < 0 && !parseInt(difference / 2)) {
+      if (difference < 0 && !parseInt(difference)) {
         return "Now";
       }
       return d.split("T")[1];
@@ -417,6 +417,7 @@ const updateLocation = async (latitude, longitude, placeName) => {
 
 const main = async () => {
   const maxDetailedDays = 6;
+  let offsetHours = 0;
 
   const townResult = document.getElementById("town-result");
   const townSearch = document.getElementById("town-search");
@@ -437,6 +438,10 @@ const main = async () => {
   }
 
   window.addEventListener("hashchange", async () => {
+    offsetHours = 0;
+    detailsPrevButton.disabled = true;
+    detailsNextButton.disabled = false;
+
     if (!window.location.hash || window.location.hash === "#") {
       townSearch.value = "";
       weatherData = await updateLocation(locationData.lat, locationData.lon, locationData.place);
@@ -452,13 +457,11 @@ const main = async () => {
   townResult.addEventListener("click", () => document.activeElement.blur());
   locationButton.addEventListener("click", () => { window.location.hash = ""; });
 
-  let offsetHours = 0;
   detailsPrevButton.addEventListener("click", () => {
     offsetHours = Math.max(offsetHours - 24, 0);
     updateDetails(weatherData, offsetHours);
     detailsPrevButton.disabled = !offsetHours;
     detailsNextButton.disabled = false;
-    
   });
   detailsNextButton.addEventListener("click", () => {
     offsetHours = Math.min(offsetHours + 24, 24 * maxDetailedDays);
