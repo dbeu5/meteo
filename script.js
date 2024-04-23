@@ -315,7 +315,7 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
     .attr("class", "main__section--details__grid__time")
     .text((d) => {
       const difference = (Date.parse(d) - Date.now() - (dataset.utc_offset_seconds - 7200) * 1000) / 3600000;
-      if (difference < 0 && !parseInt(difference)) {
+      if (difference < 0 && !parseInt(difference / 2)) {
         return "Now";
       }
       return d.split("T")[1];
