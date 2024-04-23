@@ -291,9 +291,9 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
 
   const rem = parseInt(getComputedStyle(document.querySelector(":root")).fontSize);
   const graphHeight = 10 * rem;
-  const graphWidthUnit = 5 * rem;
+  const graphWidthUnit = 5.5 * rem;
 
-  const times = dataset.hourly.time.slice(offset, 24 + offset);
+  const times = dataset.hourly.time.slice(offset, 24 + offset).filter((_, i) => (i + 1) % 2);
   const symbols = dataset.hourly.weather_code.slice(offset, 24 + offset).map(
     (weatherCode, i) => [
       weatherCode,
@@ -302,9 +302,9 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
       false,
       false
     ]
-  );
-  const temperatures = dataset.hourly.temperature_2m.slice(offset, 24 + offset);
-  const precipitationProbabilities = dataset.hourly.precipitation_probability.slice(offset, 25 + offset);
+  ).filter((_, i) => (i + 1) % 2);
+  const temperatures = dataset.hourly.temperature_2m.slice(offset, 24 + offset).filter((_, i) => (i + 1) % 2);
+  let precipitationProbabilities = dataset.hourly.precipitation_probability.slice(offset, 25 + offset);
 
   // display day
   updateDetailedDay(offset);
@@ -336,10 +336,10 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
   // precipitation graph
   const yRange = d3.scaleLinear()
     .domain([-2, 101])
-    .range([graphHeight, rem / 2]);
+    .range([graphHeight, 5]);
   const xRange = d3.scaleLinear()
     .domain([0, 25])
-    .range([-1, (graphWidthUnit + 1) * 25]);
+    .range([-1, (graphWidthUnit + 1) * 12.5]);
 
   const areaGenerator = d3.area()
     .x((_, i) => xRange(i))
@@ -349,7 +349,7 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
 
   d3.select("#details-grid")
     .append("svg")
-    .attr("width", graphWidthUnit * 24)
+    .attr("width", graphWidthUnit * 12)
     .attr("height", graphHeight)
     .attr("class", "main__section--details__grid__graph")
     .attr("id", "graph");
@@ -371,6 +371,7 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
   
   // precipitation percentages
   precipitationProbabilities.pop();
+  precipitationProbabilities = precipitationProbabilities.filter((_, i) => (i + 1) % 2);
   d3.select("#details-grid").selectAll(".main__section--details__grid__percentage")
     .data(precipitationProbabilities).enter().append("p")
     .attr("class", "main__section--details__grid__percentage")
@@ -435,7 +436,7 @@ const main = async () => {
     }
   }
 
-  addEventListener("hashchange", async () => {
+  window.addEventListener("hashchange", async () => {
     if (!window.location.hash || window.location.hash === "#") {
       townSearch.value = "";
       weatherData = await updateLocation(locationData.lat, locationData.lon, locationData.place);
