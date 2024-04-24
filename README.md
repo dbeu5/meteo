@@ -9,7 +9,7 @@ Weather data by:
 
 Location data based on:
 - [Geonames](https://www.geonames.org/)
-- [IPGEO](https://api.techniknews.net/ipgeo/)
+- [IPGEO](https://api.techniknews.net/ipgeo)
 
 Icons used:
 - [Eva Icons](https://akveo.github.io/eva-icons) by [Akveo](https://github.com/akveo)
