@@ -304,17 +304,25 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
     ]
   ).filter((_, i) => (i + 1) % 2);
   const temperatures = dataset.hourly.temperature_2m.slice(offset, 24 + offset).filter((_, i) => (i + 1) % 2);
-  let precipitationProbabilities = dataset.hourly.precipitation_probability.slice(offset, 25 + offset);
+  const precipitationProbabilities = dataset.hourly.precipitation_probability.slice(offset, 25 + offset);
+  let precipitationPercentages = [];
+  for (let i = 0; i < 24; i+= 2) {
+    precipitationPercentages.push(Math.max(
+      precipitationProbabilities[i],
+      precipitationProbabilities[i + 1],
+    ));
+  }
 
   // display day
   updateDetailedDay(dataset.daily.time[offset / 24]);
 
   // times
+  const userOffsetSeconds = new Date(Date.now()).getTimezoneOffset() * 60;
   d3.select("#details-grid").selectAll(".main__section--details__grid__time")
     .data(times).enter().append("p")
     .attr("class", "main__section--details__grid__time")
     .text((d) => {
-      const difference = (Date.parse(d) - Date.now() - (dataset.utc_offset_seconds - 7200) * 1000) / 3600000;
+      const difference = (Date.parse(d) - Date.now() - (userOffsetSeconds + dataset.utc_offset_seconds) * 1000) / 3600000;
       if (difference < 0 && !parseInt(difference / 2)) {
         return "Now";
       }
@@ -370,10 +378,8 @@ const updateDetails = (dataset = {error: true}, offset = 0) => {
     .attr("xlink:href", "./res/details-precipitation.svg");
   
   // precipitation percentages
-  precipitationProbabilities.pop();
-  precipitationProbabilities = precipitationProbabilities.filter((_, i) => (i + 1) % 2);
   d3.select("#details-grid").selectAll(".main__section--details__grid__percentage")
-    .data(precipitationProbabilities).enter().append("p")
+    .data(precipitationPercentages).enter().append("p")
     .attr("class", "main__section--details__grid__percentage")
     .text((d) => `${d}%`);
   
